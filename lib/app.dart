@@ -1,16 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:my_stacked_demo/_core/thrio/app.dart';
 
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '_core/locator.dart';
+import '_core/thrio/app.dart';
+import 'services/cache_service.dart';
+import 'plugins/i18n.dart';
+import 'themes/app_theme.dart';
 import 'models/app_model.dart';
 import 'views/splash/splash_view.dart';
-import 'services/cache_service.dart';
-import 'themes/app_theme.dart';
-import 'plugins/i18n.dart';
 
 class App extends StatelessWidget {
   final String entrypoint;
@@ -31,7 +31,7 @@ class App extends StatelessWidget {
           /// 路由配置
           navigatorKey: locator<NavigationService>().navigatorKey,
 
-          /// 默认页面
+          // /// 默认页面
           home: SplashPage(),
           theme: model.theme,
 

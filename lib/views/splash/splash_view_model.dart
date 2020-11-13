@@ -1,7 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:my_stacked_demo/_core/locator.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
+import 'package:thrio/thrio.dart';
 
 import '../../plugins/i18n.dart';
 
@@ -25,6 +28,8 @@ class SplashViewModel extends BaseViewModel {
       } else {
         _timer.cancel();
         _timer = null;
+
+        ThrioNavigator.push(url: '/biz1/flutter1');
       }
     });
   }

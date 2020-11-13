@@ -1,9 +1,44 @@
 import 'package:flutter/widgets.dart';
+import 'package:my_stacked_demo/pages/page1.dart';
+import 'package:my_stacked_demo/pages/page2.dart';
+import 'package:my_stacked_demo/pages/page3.dart';
+import 'package:my_stacked_demo/pages/page4.dart';
 import 'package:thrio/thrio.dart';
 
 class Module with ThrioModule, ModulePageBuilder, ModulePageObserver, ModuleRouteTransitionsBuilder, NavigatorPageObserver {
   @override
-  void onPageBuilderRegister() {}
+  void onPageBuilderRegister() {
+    registerPageBuilder(
+      '/biz1/flutter1',
+      (settings) => Page1(
+        index: settings.index,
+        params: settings.params,
+      ),
+    );
+
+    registerPageBuilder(
+      '/biz2/flutter2',
+      (settings) => Page2(
+        index: settings.index,
+        params: settings.params,
+      ),
+    );
+
+    registerPageBuilder(
+      '/biz1/flutter3',
+      (settings) => Page3(
+        index: settings.index,
+        params: settings.params,
+      ),
+    );
+    registerPageBuilder(
+      '/biz2/flutter4',
+      (settings) => Page4(
+        index: settings.index,
+        params: settings.params,
+      ),
+    );
+  }
 
   @override
   void onPageObserverRegister() {
