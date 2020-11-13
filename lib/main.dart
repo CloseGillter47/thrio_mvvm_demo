@@ -1,17 +1,29 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 
-import 'app.dart';
-import '_core/locator.dart';
-import 'widgets/zutils.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 
-void main() async {
-  /// 初始化
-  WidgetsFlutterBinding.ensureInitialized();
+import 'bootstrap.dart' as bootstrap;
 
-  /// 统一 Android 状态栏
-  setAndroidStatusBar();
+Future<void> main() async {
+  FlutterError.onError = (details) async {
+    Zone.current.handleUncaughtError(details.exception, details.stack);
+  };
+  runZoned<void>(bootstrap.main);
+}
 
-  await setupLocator();
+@pragma('vm:entry-point')
+Future<void> biz1() async {
+  FlutterError.onError = (details) async {
+    Zone.current.handleUncaughtError(details.exception, details.stack);
+  };
+  runZoned<void>(bootstrap.biz1);
+}
 
-  runApp(App());
+@pragma('vm:entry-point')
+Future<void> biz2() async {
+  FlutterError.onError = (details) async {
+    Zone.current.handleUncaughtError(details.exception, details.stack);
+  };
+  runZoned<void>(bootstrap.biz2);
 }

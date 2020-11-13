@@ -1,0 +1,51 @@
+import 'package:flutter/cupertino.dart';
+import 'package:thrio/thrio.dart';
+
+class ThrioNavigatorApp extends CupertinoApp {
+  ThrioNavigatorApp({
+    Key key,
+    GlobalKey<NavigatorState> navigatorKey,
+    String entrypoint = 'main',
+    String title = '',
+    GenerateAppTitle onGenerateTitle,
+    Color color,
+    CupertinoThemeData theme,
+    Locale locale,
+    Widget home,
+    Iterable<LocalizationsDelegate<dynamic>> localizationsDelegates,
+    LocaleListResolutionCallback localeListResolutionCallback,
+    LocaleResolutionCallback localeResolutionCallback,
+    Iterable<Locale> supportedLocales = const <Locale>[Locale('en', 'US')],
+    bool debugShowMaterialGrid = false,
+    bool showPerformanceOverlay = false,
+    bool checkerboardRasterCacheImages = false,
+    bool checkerboardOffscreenLayers = false,
+    bool showSemanticsDebugger = false,
+    bool debugShowCheckedModeBanner = true,
+    Map<LogicalKeySet, Intent> shortcuts,
+    Map<Type, Action<Intent>> actions,
+  }) : super(
+          key: key,
+          home: home,
+          navigatorKey: navigatorKey,
+          routes: const <String, WidgetBuilder>{},
+          navigatorObservers: [], // ignore: prefer_const_literals_to_create_immutables
+          builder: ThrioNavigator.builder(entrypoint: entrypoint),
+          title: title,
+          onGenerateTitle: onGenerateTitle,
+          color: color,
+          theme: theme,
+          locale: locale,
+          localizationsDelegates: localizationsDelegates,
+          localeListResolutionCallback: localeListResolutionCallback,
+          localeResolutionCallback: localeResolutionCallback,
+          supportedLocales: supportedLocales,
+          showPerformanceOverlay: showPerformanceOverlay,
+          checkerboardRasterCacheImages: checkerboardRasterCacheImages,
+          checkerboardOffscreenLayers: checkerboardOffscreenLayers,
+          showSemanticsDebugger: showSemanticsDebugger,
+          debugShowCheckedModeBanner: debugShowCheckedModeBanner,
+          shortcuts: shortcuts,
+          actions: actions,
+        );
+}

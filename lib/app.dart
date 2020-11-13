@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:my_stacked_demo/_core/thrio/app.dart';
 
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '_core/locator.dart';
-import '_core/router.gr.dart';
 import 'models/app_model.dart';
 import 'views/splash/splash_view.dart';
 import 'services/cache_service.dart';
@@ -13,34 +13,38 @@ import 'themes/app_theme.dart';
 import 'plugins/i18n.dart';
 
 class App extends StatelessWidget {
+  final String entrypoint;
+  App({Key key, @required this.entrypoint}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<AppViewModel>.reactive(
       disposeViewModel: false,
       viewModelBuilder: () => AppViewModel(),
       onModelReady: (model) => model.init(),
-      builder: (context, model, _) => CupertinoApp(
-        debugShowCheckedModeBanner: false,
-        home: SplashPage(),
-        theme: model.theme,
-        builder: (context, child) => AppTheme(
-          data: model.theme,
-          child: child,
+      builder: (cxt, model, _) => ExcludeSemantics(
+        child: ThrioNavigatorApp(
+          debugShowCheckedModeBanner: false,
+
+          entrypoint: entrypoint,
+
+          /// 路由配置
+          navigatorKey: locator<NavigationService>().navigatorKey,
+
+          /// 默认页面
+          home: SplashPage(),
+          theme: model.theme,
+
+          /// 多语言配置
+          locale: model?.state?.language ?? Locale('zh', 'CN'),
+          localizationsDelegates: [
+            model.i18n,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: model.i18n.supportedLocales,
         ),
-
-        /// 多语言配置
-        locale: Locale('zh', 'CN'),
-        localizationsDelegates: [
-          model.i18n,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: model.i18n.supportedLocales,
-
-        /// 路由配置
-        onGenerateRoute: Router().onGenerateRoute,
-        navigatorKey: locator<NavigationService>().navigatorKey,
       ),
     );
   }
