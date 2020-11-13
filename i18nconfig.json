@@ -1,0 +1,14 @@
+{
+  "defaultLocale": "zh-CN",
+  "locales": [
+    "zh-CN",
+    "en-US"
+  ],
+  "localePath": "i18n",
+  "generatedPath": "lib/plugins",
+  "ltr": [
+    "zh-CN",
+    "en-US"
+  ],
+  "rtl": []
+}
