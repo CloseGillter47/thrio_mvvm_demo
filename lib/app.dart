@@ -10,7 +10,8 @@ import 'services/cache_service.dart';
 import 'plugins/i18n.dart';
 import 'themes/app_theme.dart';
 import 'models/app_model.dart';
-import 'views/splash/splash_view.dart';
+
+import 'pages/404/view.dart';
 
 class App extends StatelessWidget {
   final String entrypoint;
@@ -21,7 +22,7 @@ class App extends StatelessWidget {
     return ViewModelBuilder<AppViewModel>.reactive(
       disposeViewModel: false,
       viewModelBuilder: () => AppViewModel(),
-      onModelReady: (model) => model.init(),
+      onModelReady: (model) => WidgetsBinding.instance.addPostFrameCallback((_) => model.init()),
       builder: (cxt, model, _) => ExcludeSemantics(
         child: ThrioNavigatorApp(
           debugShowCheckedModeBanner: false,
@@ -29,10 +30,10 @@ class App extends StatelessWidget {
           entrypoint: entrypoint,
 
           /// 路由配置
-          navigatorKey: locator<NavigationService>().navigatorKey,
+          // navigatorKey: locator<NavigationService>().navigatorKey,
 
           // /// 默认页面
-          home: SplashPage(),
+          home: Page404(),
           theme: model.theme,
 
           /// 多语言配置

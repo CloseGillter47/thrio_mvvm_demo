@@ -1,8 +1,6 @@
 library splash_page;
 
 import 'package:flutter/cupertino.dart';
-import 'package:my_stacked_demo/_core/locator.dart';
-import 'package:stacked_services/stacked_services.dart';
 import '../../themes/app_theme.dart';
 import 'package:stacked/stacked.dart';
 

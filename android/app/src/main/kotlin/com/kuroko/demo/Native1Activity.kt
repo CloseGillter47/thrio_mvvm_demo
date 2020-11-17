@@ -14,7 +14,7 @@ class Native1Activity : AppCompatActivity(), PageNotifyListener {
         tv_native.text = "Native 1"
 
         btn_10.setOnClickListener {
-            ThrioNavigator.push("/biz1/flutter1",
+            ThrioNavigator.push("/flutter/index",
                     params = mapOf("k1" to 1),
                     result = {
                         Log.v("Thrio", "push result data $it")

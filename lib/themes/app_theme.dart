@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class AppTheme extends StatelessWidget {
   final Widget child;
@@ -10,8 +11,7 @@ class AppTheme extends StatelessWidget {
   }) : super();
 
   static AppThemeData of(BuildContext context) {
-    final _InheritedAppTheme appTheme =
-        context.dependOnInheritedWidgetOfExactType<_InheritedAppTheme>();
+    final _InheritedAppTheme appTheme = context.dependOnInheritedWidgetOfExactType<_InheritedAppTheme>();
 
     return appTheme?.theme?.data ?? AppThemeData();
   }
@@ -46,6 +46,11 @@ class AppThemeData extends CupertinoThemeData {
         );
 
   final Color red;
+
+  static AppThemeData from(BuildContext context) {
+    final theme = CupertinoTheme.of(context) as AppThemeData;
+    return theme;
+  }
 }
 
 class _InheritedAppTheme extends InheritedWidget {
@@ -58,6 +63,5 @@ class _InheritedAppTheme extends InheritedWidget {
   }) : super(key: key, child: child);
 
   @override
-  bool updateShouldNotify(_InheritedAppTheme old) =>
-      theme.data != old.theme.data;
+  bool updateShouldNotify(_InheritedAppTheme old) => theme.data != old.theme.data;
 }

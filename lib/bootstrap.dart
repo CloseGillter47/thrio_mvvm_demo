@@ -3,7 +3,8 @@ import 'package:thrio/thrio.dart';
 
 import '_core/locator.dart';
 import 'app.dart';
-import 'widgets/zutils.dart';
+
+import 'widgets/utils.dart';
 
 import 'modules/module.dart' as modules;
 
