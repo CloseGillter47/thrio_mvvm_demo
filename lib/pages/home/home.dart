@@ -2,6 +2,7 @@ library home_page;
 
 import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
+import 'package:thrio/thrio.dart';
 
 part 'home_view.dart';
 part 'home_view_model.dart';

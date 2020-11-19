@@ -8,7 +8,12 @@ class _HomePageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       child: Center(
-        child: Text("data"),
+        child: CupertinoButton(
+          child: Text("TO_NATIVE 1"),
+          onPressed: () {
+            ThrioNavigator.push(url: "/biz1/native1");
+          },
+        ),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
+import 'package:my_stacked_demo/pages/home/pages/info/info.dart';
 import 'package:thrio/thrio.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -7,6 +8,35 @@ import '../_core/locator.dart';
 import '../pages/404/view.dart';
 import '../pages/main/main.dart';
 import '../widgets/utils.dart';
+
+Widget dispatchRoute(RouteSettings settings) {
+  print('🙃 ----------------------------------------------');
+  print(settings.name);
+  print(settings.index);
+  print(settings.params);
+  print('🙂 ----------------------------------------------');
+
+  /// 暂时放这里，后续请挪走
+  setAndroidStatusBar();
+
+  return WillPopScope(
+    onWillPop: () async {
+      final nav = locator<NavigationService>().navigatorKey;
+      final canPop = nav.currentState.canPop();
+
+      if (canPop) nav.currentState.pop();
+
+      return !canPop;
+    },
+    child: CupertinoTabView(
+      navigatorKey: locator<NavigationService>().navigatorKey,
+      routes: {
+        "/": (c) => MainPage(),
+      },
+      onUnknownRoute: (s) => CupertinoPageRoute(builder: (c) => Page404()),
+    ),
+  );
+}
 
 class Module with ThrioModule, ModulePageBuilder, ModulePageObserver, ModuleRouteTransitionsBuilder, NavigatorPageObserver {
   /// 主模块路由分发
@@ -17,12 +47,9 @@ class Module with ThrioModule, ModulePageBuilder, ModulePageObserver, ModuleRout
     print(settings.params);
     print('🙂 ----------------------------------------------');
 
-    /// 暂时放这里，后续请挪走
-    setAndroidStatusBar();
-
     return WillPopScope(
       onWillPop: () async {
-        final nav = locator<NavigationService>().navigatorKey as GlobalKey<NavigatorState>;
+        final nav = locator<NavigationService>().navigatorKey;
         final canPop = nav.currentState.canPop();
 
         if (canPop) nav.currentState.pop();
@@ -33,6 +60,7 @@ class Module with ThrioModule, ModulePageBuilder, ModulePageObserver, ModuleRout
         navigatorKey: locator<NavigationService>().navigatorKey,
         routes: {
           "/": (c) => MainPage(),
+          "/home/info": (c) => InfoPage(),
         },
         onUnknownRoute: (s) => CupertinoPageRoute(builder: (c) => Page404()),
       ),
@@ -42,7 +70,9 @@ class Module with ThrioModule, ModulePageBuilder, ModulePageObserver, ModuleRout
   @override
   void onPageBuilderRegister() {
     /// 注册 [flutter] 端主路由
-    registerPageBuilder('/flutter/index', _dispatch);
+    registerPageBuilder('/flutter/index', dispatchRoute);
+
+    registerPageBuilder('/flutter/index/home/info', dispatchRoute);
 
     // registerPageBuilder(
     //   '/biz1/flutter1',

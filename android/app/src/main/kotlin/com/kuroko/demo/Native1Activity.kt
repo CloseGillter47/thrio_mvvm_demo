@@ -32,7 +32,7 @@ class Native1Activity : AppCompatActivity(), PageNotifyListener {
         }
 
         btn_12.setOnClickListener {
-            ThrioNavigator.push("/biz2/flutter2",
+            ThrioNavigator.push("/flutter/index/home/info",
                     params = mapOf("k1" to 1),
                     result = {
                         Log.v("Thrio", "push result data $it")
