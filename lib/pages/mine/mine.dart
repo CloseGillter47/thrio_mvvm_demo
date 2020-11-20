@@ -10,7 +10,10 @@ class MineTabPage extends StatelessWidget {
       alignment: Alignment.center,
       child: CupertinoButton(
         child: Text("TO_SETTING"),
-        onPressed: () => locator<NavigationService>().navigateWithTransition(SettingPage(), transition: "rightToLeft"),
+        // onPressed: () => locator<NavigationService>().navigateWithTransition(SettingPage(), transition: "rightToLeft"),
+        onPressed: () => Navigator.of(context).push(
+          CupertinoPageRoute(builder: (c) => SettingPage()),
+        ),
       ),
     );
   }

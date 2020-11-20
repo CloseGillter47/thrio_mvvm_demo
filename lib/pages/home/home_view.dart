@@ -7,6 +7,9 @@ class _HomePageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text("HOME"),
+      ),
       child: Center(
         child: CupertinoButton(
           child: Text("TO_NATIVE 1"),

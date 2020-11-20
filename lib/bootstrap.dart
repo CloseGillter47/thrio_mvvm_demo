@@ -4,8 +4,6 @@ import 'package:thrio/thrio.dart';
 import '_core/locator.dart';
 import 'app.dart';
 
-import 'widgets/utils.dart';
-
 import 'modules/module.dart' as modules;
 
 // import 'src/sample/module.dart' as sample;
@@ -17,8 +15,6 @@ void biz2() => setup(() => runApp(const BootstrapApp(entrypoint: 'biz2')));
 Future<void> setup(VoidCallback fnc) async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  /// 统一 Android 状态栏
-  setAndroidStatusBar();
   await setupLocator();
   fnc?.call();
 }

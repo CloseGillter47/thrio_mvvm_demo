@@ -8,7 +8,7 @@ void setAndroidStatusBar() {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Color(0x00000000),
     ));
-  } else if (Platform.isIOS) {}
+  }
 
   /// 禁止横屏
   SystemChrome.setPreferredOrientations([

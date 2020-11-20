@@ -7,6 +7,7 @@ import 'package:stacked_services/stacked_services.dart';
 import '../_core/locator.dart';
 import '../pages/404/view.dart';
 import '../pages/main/main.dart';
+import '../routes/router.dart';
 import '../widgets/utils.dart';
 
 Widget dispatchRoute(RouteSettings settings) {
@@ -39,6 +40,8 @@ Widget dispatchRoute(RouteSettings settings) {
 }
 
 class Module with ThrioModule, ModulePageBuilder, ModulePageObserver, ModuleRouteTransitionsBuilder, NavigatorPageObserver {
+  Widget app;
+
   /// 主模块路由分发
   Widget _dispatch(RouteSettings settings) {
     print('🙃 ----------------------------------------------');
@@ -46,33 +49,15 @@ class Module with ThrioModule, ModulePageBuilder, ModulePageObserver, ModuleRout
     print(settings.index);
     print(settings.params);
     print('🙂 ----------------------------------------------');
-
-    return WillPopScope(
-      onWillPop: () async {
-        final nav = locator<NavigationService>().navigatorKey;
-        final canPop = nav.currentState.canPop();
-
-        if (canPop) nav.currentState.pop();
-
-        return !canPop;
-      },
-      child: CupertinoTabView(
-        navigatorKey: locator<NavigationService>().navigatorKey,
-        routes: {
-          "/": (c) => MainPage(),
-          "/home/info": (c) => InfoPage(),
-        },
-        onUnknownRoute: (s) => CupertinoPageRoute(builder: (c) => Page404()),
-      ),
-    );
+    return NavigatorPages();
   }
 
   @override
   void onPageBuilderRegister() {
     /// 注册 [flutter] 端主路由
-    registerPageBuilder('/flutter/index', dispatchRoute);
+    registerPageBuilder('/flutter/index', _dispatch);
 
-    registerPageBuilder('/flutter/index/home/info', dispatchRoute);
+    // registerPageBuilder('/flutter/index/home/info', dispatchRoute);
 
     // registerPageBuilder(
     //   '/biz1/flutter1',
